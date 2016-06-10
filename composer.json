@@ -123,7 +123,7 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "PhantomInstaller\\Installer::installPhantomJS",
+            "PhantomInstaller\\Installer::installPhantomJS"
         ],
         "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
     }
