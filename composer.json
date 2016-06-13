@@ -104,6 +104,9 @@
             "docroot/core": [
                 "type:drupal-core"
             ],
+            "docroot/profiles": [
+                "type:drupal-profile"
+            ],
             "libraries/contrib/{$name}": [
                 "type:drupal-library"
             ],
