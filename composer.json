@@ -6,7 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "drush/drush": "8.1.2",
+        "drush/drush": "^9.0",
         "drupal/drupal-extension": "^3.1",
         "jakoch/phantomjs-installer": "1.9.8",
         "behat/behat": "^3.0",
@@ -106,36 +106,34 @@
             "docroot/core": [
                 "type:drupal-core"
             ],
-            "docroot/libraries/{$name}": [
-                "type:drupal-library"
-            ],
             "docroot/profiles/{$name}": [
                 "type:drupal-profile"
+            ],
+            "docroot/libraries/{$name}": [
+                "type:drupal-library"
             ],
             "modules/contrib/{$name}": [
                 "type:drupal-module"
             ],
             "themes/contrib/{$name}": [
                 "type:drupal-theme"
-            ],
-            "drush/contrib/{$name}": [
-                "type:drupal-drush"
             ]
         },
         "enable-patching": true
     },
     "require": {
         "cweagans/composer-patches": "^1.5.0",
-        "composer/installers": "^1.0.20",
-        "drupal/df": "dev-8.x-1.x",
-        "drupal-composer/drupal-scaffold": "^2.0.1"
+        "drupal-composer/drupal-scaffold": "^2.0.1",
+        "drupal/df": "dev-8.x-1.x"
     },
     "scripts": {
         "post-install-cmd": [
-            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+            "mkdir -p docroot/profiles/df && rsync -a . docroot/profiles/df --exclude \".idea\" --exclude bin --exclude \".git\" --exclude \".gitignore\" --exclude docroot --exclude \"*.make\" --exclude \".travis.yml\" --exclude vendor && rm -fr modules/contrib themes/contrib"
         ],
         "post-update-cmd": [
-            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+            "mkdir -p docroot/profiles/df && rsync -a . docroot/profiles/df --exclude \".idea\" --exclude bin --exclude \".git\" --exclude \".gitignore\" --exclude docroot --exclude \"*.make\" --exclude \".travis.yml\" --exclude vendor && rm -fr modules/contrib themes/contrib"
         ]
     }
 }
