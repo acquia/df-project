@@ -6,12 +6,16 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "drush/drush": "^9.0",
-        "drupal/drupal-extension": "^3.1",
-        "jakoch/phantomjs-installer": "1.9.8",
-        "behat/behat": "^3.0",
+        "drupal/drupal-extension": "^3.2",
+        "behat/mink": "~1.7",
+        "behat/mink-goutte-driver": "~1.2",
+        "jcalderonzumba/gastonjs": "~1.0.2",
         "drupal/coder": "8.*",
-        "lakion/mink-debug-extension": "^1.0.3"
+        "mikey179/vfsStream": "~1.2",
+        "phpunit/phpunit": "~4.8",
+        "symfony/css-selector": "~2.8",
+        "behat/behat": "^3.0",
+        "se/selenium-server-standalone": "^2.53"
     },
     "config": {
         "bin-dir": "bin/"
@@ -58,6 +62,18 @@
                     "url": "https://github.com/enyo/dropzone",
                     "type": "git",
                     "reference": "origin/master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "leaflet/leaflet",
+                "version": "v0.7.7",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/Leaflet/Leaflet/archive/v0.7.7.zip",
+                    "type": "zip"
                 }
             }
         },
@@ -122,9 +138,11 @@
         "enable-patching": true
     },
     "require": {
+        "composer/installers": "^1.0",
         "cweagans/composer-patches": "^1.5.0",
-        "drupal-composer/drupal-scaffold": "^2.0.1",
-        "drupal/df": "dev-8.x-1.x"
+        "drupal-composer/drupal-scaffold": "^2.0.0",
+        "drupal/df": "dev-8.x-1.x",
+        "lite": "dev-master#a7df5c6b685385713e8aaf2df3f44c82e3bf823a"
     },
     "scripts": {
         "post-install-cmd": [
