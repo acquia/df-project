@@ -82,10 +82,10 @@ install:
   - phpenv rehash
 
   # Test DF HEAD
-  - if [[ "$DF" == HEAD ]]; then composer require "drupal/df:dev-8.x-1.x" --no-update; fi
+  - if [[ "$DF" == HEAD ]]; then composer require "acquia/df:dev-8.x-2.x" --no-update; fi
 
   # Install drush
-  - composer require drush/drush:^9.0 --no-update
+  - composer require drush/drush:^8.0 --no-update
 
   # Build the DF code base.
   - composer install
