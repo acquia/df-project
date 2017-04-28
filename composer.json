@@ -15,7 +15,8 @@
         "phpunit/phpunit": "~4.8",
         "symfony/css-selector": "~2.8",
         "behat/behat": "^3.0",
-        "se/selenium-server-standalone": "^2.53"
+        "se/selenium-server-standalone": "^2.53",
+        "composer/composer": "^1.3"
     },
     "config": {
         "bin-dir": "bin/"
@@ -23,10 +24,6 @@
     "repositories": [
         {   "type": "composer",
             "url": "https://packages.drupal.org/8"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/DevinCarlson/composer-patches"
         },
         {
             "type": "package",
@@ -69,10 +66,10 @@
             "type": "package",
             "package": {
                 "name": "leaflet/leaflet",
-                "version": "v0.7.7",
+                "version": "1.0.3",
                 "type": "drupal-library",
                 "dist": {
-                    "url": "https://github.com/Leaflet/Leaflet/archive/v0.7.7.zip",
+                    "url": "https://github.com/Leaflet/Leaflet/archive/v1.0.3.zip",
                     "type": "zip"
                 }
             }
@@ -115,6 +112,18 @@
                     "reference": "origin/master"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "lokesh/lightbox2",
+                "version": "2.9.0",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/lokesh/lightbox2/archive/v2.9.0.zip",
+                    "type": "zip"
+                }
+            }
         }
     ],
     "extra": {
@@ -128,30 +137,38 @@
             "docroot/libraries/{$name}": [
                 "type:drupal-library"
             ],
-            "modules/contrib/{$name}": [
+            "docroot/modules/contrib/{$name}": [
                 "type:drupal-module"
             ],
-            "themes/contrib/{$name}": [
+            "docroot/themes/contrib/{$name}": [
                 "type:drupal-theme"
+            ],
+            "drush/{$name}": [
+                "type:drupal-drush"
             ]
         },
-        "enable-patching": true
+        "enable-patching": true,
+        "patches-ignore": {
+            "acquia/lightning": {
+                "drupal/entity_block": {
+                    "This patch conflicts with the patch to add UUID support": "https://www.drupal.org/files/issues/2846004-2.patch"
+                }
+            }
+        }
     },
     "require": {
         "composer/installers": "^1.0",
-        "cweagans/composer-patches": "^1.5.0",
         "drupal-composer/drupal-scaffold": "^2.0.0",
-        "acquia/df": "dev-8.x-2.x",
+        "cweagans/composer-patches": "^1.6.0",
+        "acquia/df": "~2.0.0",
         "lite": "dev-master#a7df5c6b685385713e8aaf2df3f44c82e3bf823a"
     },
     "scripts": {
         "post-install-cmd": [
-            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-            "mkdir -p docroot/profiles/df && rsync -a . docroot/profiles/df --exclude \".idea\" --exclude bin --exclude \".git\" --exclude \".gitignore\" --exclude docroot --exclude \"*.make\" --exclude \".travis.yml\" --exclude vendor && rm -fr modules/contrib themes/contrib"
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
         ],
         "post-update-cmd": [
-            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-            "mkdir -p docroot/profiles/df && rsync -a . docroot/profiles/df --exclude \".idea\" --exclude bin --exclude \".git\" --exclude \".gitignore\" --exclude docroot --exclude \"*.make\" --exclude \".travis.yml\" --exclude vendor && rm -fr modules/contrib themes/contrib"
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
         ]
     }
 }

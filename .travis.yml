@@ -11,7 +11,7 @@ cache:
     - "$HOME/.npm"
 
 php:
-  - 5.6
+  - 7.0
 
 env:
   matrix:
@@ -33,15 +33,15 @@ addons:
     - fonts-liberation
 
 before_install:
+  # Add the oauth token to prevent GitHub timeouts.
+  - git config --global github.accesstoken $GITHUB_OAUTH_TOKEN
+
   # Disable xdebug.
   - phpenv config-rm xdebug.ini
 
   # Update composer.
   - composer self-update
   - composer --version
-
-  # Add the oauth token to prevent GitHub timeouts.
-  - git config --global github.accesstoken $GITHUB_OAUTH_TOKEN
 
   # Initialize xvfb (see https://docs.travis-ci.com/user/gui-and-headless-browsers)
   - export DISPLAY=:99.0
@@ -75,7 +75,10 @@ install:
   # Create the MySQL database and add a user for testing.
   - mysql -u root -e "CREATE DATABASE drupal; CREATE USER 'df'@'localhost' IDENTIFIED BY 'df'; GRANT ALL ON drupal.* TO 'df'@'localhost';"
 
-  # PHP conf tweaks
+  # Install the PECL YAML extension for strict parsing. yes is used to
+  # acknowledge all prompts.
+  - yes '' | pecl install yaml
+  # Tweak PHP configuration.
   - echo 'max_execution_time = 120' >> drupal.php.ini;
   - echo 'sendmail_path = /bin/true' >> drupal.php.ini;
   - phpenv config-add drupal.php.ini
@@ -86,6 +89,7 @@ install:
 
   # Install drush
   - composer require drush/drush:^8.0 --no-update
+  - composer require drupal/devel --no-update
 
   # Build the DF code base.
   - composer install
@@ -97,22 +101,17 @@ install:
 
   # If a scenario has been specified, enable it.
   - if [[ "$SCENARIO" != none ]]; then travis_wait drush es $SCENARIO; fi
+  - cd ..
 
 before_script:
+  - cd docroot
   - drush runserver --default-server=builtin 8080 &>/dev/null &
   - jdk_switcher use oraclejdk8
   # Start Selenium and dump its ginormous log into a temporary file.
   - mkdir ../tmp
   - selenium-server-standalone -port 4444 -log ../tmp/selenium2.log &
   - sleep 5
-  - cd ..
-
-  # Copy Behat configuration from DF.
-  - cp ./docroot/profiles/df/behat.* .
-  - "sed -i -e 's/selenium2: ~/selenium2: { browser: chrome }/g' behat.yml"
-  - sed -i -e 's/%paths.base%\/tests\/features/docroot\/profiles\/df\/tests\/features/g' behat.yml
-  - sed -i -e 's/tests\/features\/bootstrap/docroot\/profiles\/df\/tests\/features\/bootstrap/g' behat.yml
-  - sed -i -e "s/ '..\/..\/'/ 'docroot'/g" behat.local.yml
+  - cd ./profiles/df
 
 script:
   - behat --strict --stop-on-failure --tags=none
