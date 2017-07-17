@@ -183,7 +183,7 @@
         "drupal-composer/drupal-scaffold": "^2.0.0",
         "cweagans/composer-patches": "^1.6.0",
         "acquia/df": "~2.0.0",
-        "lite": "dev-master#a7df5c6b685385713e8aaf2df3f44c82e3bf823a"
+        "loopindex/ckeditor-track-changes": "dev-master#a7df5c6b685385713e8aaf2df3f44c82e3bf823a"
     },
     "scripts": {
         "post-install-cmd": [
