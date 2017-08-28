@@ -20,103 +20,18 @@
         "drush/drush": "8.1.11",
         "drupal/console": "^1.0"
     },
-    "config": {
-        "bin-dir": "bin/"
+    "require": {
+        "drupal-composer/drupal-scaffold": "^2.0.0",
+        "cweagans/composer-patches": "^1.6.0",
+        "acquia/df": "~2.0.0",
+        "loopindex/ckeditor-track-changes": "dev-master#a7df5c6b685385713e8aaf2df3f44c82e3bf823a"
     },
     "repositories": [
         {   "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
-        {
-            "type": "package",
-            "package": {
-                "name": "desandro/masonry",
-                "version": "v3.3.1",
-                "type": "drupal-library",
-                "source": {
-                    "url": "https://github.com/desandro/masonry.git",
-                    "type": "git",
-                    "reference": "v3.3.1"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "desandro/imagesloaded",
-                "version": "v3.1.8",
-                "type": "drupal-library",
-                "source": {
-                    "url": "https://github.com/desandro/imagesloaded.git",
-                    "type": "git",
-                    "reference": "v3.1.8"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "enyo/dropzone",
-                "version": "v4.2.0",
-                "type": "drupal-library",
-                "source": {
-                    "url": "https://github.com/enyo/dropzone.git",
-                    "type": "git",
-                    "reference": "v4.2.0"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "fengyuanchen/cropper",
-                "version": "v3.0.0-rc.2",
-                "type": "drupal-library",
-                "source": {
-                    "url": "https://github.com/fengyuanchen/cropper.git",
-                    "type": "git",
-                    "reference": "v3.0.0-rc.2"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "leaflet/leaflet",
-                "version": "v1.0.3",
-                "type": "drupal-library",
-                "source": {
-                    "url": "https://github.com/Leaflet/Leaflet.git",
-                    "type": "git",
-                    "reference": "v1.0.3"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "itsjavi/fontawesome-iconpicker",
-                "version": "1.2.0",
-                "type": "drupal-library",
-                "source": {
-                    "url": "https://github.com/itsjavi/fontawesome-iconpicker.git",
-                    "type": "git",
-                    "reference": "1.2.0"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "kenwheeler/slick",
-                "version": "1.5.0",
-                "type": "drupal-library",
-                "source": {
-                    "url": "https://github.com/kenwheeler/slick.git",
-                    "type": "git",
-                    "reference": "1.5.0"
-                }
-            }
+        {   "type": "composer",
+            "url": "https://asset-packagist.org"
         },
         {
             "type": "package",
@@ -130,34 +45,38 @@
                     "reference": "dev-master"
                 }
             }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "lokesh/lightbox2",
-                "version": "v2.9.0",
-                "type": "drupal-library",
-                "source": {
-                    "url": "https://github.com/lokesh/lightbox2.git",
-                    "type": "git",
-                    "reference": "v2.9.0"
-                }
-            }
         }
     ],
+    "scripts": {
+        "post-install-cmd": [
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+        ],
+        "post-update-cmd": [
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin/"
+    },
     "extra": {
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
         "installer-paths": {
             "docroot/core": [
                 "type:drupal-core"
             ],
-            "docroot/profiles/{$name}": [
-                "type:drupal-profile"
-            ],
             "docroot/libraries/{$name}": [
-                "type:drupal-library"
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
             ],
             "docroot/modules/contrib/{$name}": [
                 "type:drupal-module"
+            ],
+            "docroot/profiles/{$name}": [
+                "type:drupal-profile"
             ],
             "docroot/themes/contrib/{$name}": [
                 "type:drupal-theme"
@@ -173,24 +92,9 @@
                     "This patch conflicts with the patch to add UUID support": "https://www.drupal.org/files/issues/2846004-2.patch"
                 },
                 "drupal/entity_browser": {
-                    "2877751 - Inform users how many items they can add to a field that uses an entity browser": "https://www.drupal.org/files/issues/2877751-10.patch"
+                    "2877751 - Inform users how many items they can add to a field that uses an entity browser": "https://www.drupal.org/files/issues/2877751-17.patch"
                 }
             }
         }
-    },
-    "require": {
-        "composer/installers": "^1.0",
-        "drupal-composer/drupal-scaffold": "^2.0.0",
-        "cweagans/composer-patches": "^1.6.0",
-        "acquia/df": "~2.0.0",
-        "loopindex/ckeditor-track-changes": "dev-master#a7df5c6b685385713e8aaf2df3f44c82e3bf823a"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
-        ],
-        "post-update-cmd": [
-            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
-        ]
     }
 }
