@@ -11,7 +11,7 @@ cache:
     - "$HOME/.npm"
 
 php:
-  - 7.0
+  - 7.1.8
 
 env:
   matrix:
@@ -98,7 +98,7 @@ install:
   # Generate the behat config.
   - cd ../
   - ./bin/drupal behat:init http://127.0.0.1:8080 --merge=../docroot/profiles/df/tests/behat.yml
-  - ./bin/drupal behat:include ../docroot/profiles/df/tests/features --with-subcontexts=../docroot/profiles/df/tests/features/bootstrap --with-subcontexts=../docroot/profiles/df/src/DFExtension/Context
+  - ./bin/drupal behat:include ../docroot/profiles/df/tests/features --with-subcontexts=../docroot/profiles/df/tests/features/bootstrap --with-subcontexts=../docroot/profiles/df/src/DFExtension/Context --with-subcontexts=../docroot/profiles/lightning/src/LightningExtension/Context
   - cd ./docroot
 
 before_script:
