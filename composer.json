@@ -86,7 +86,7 @@
           },
           "drupal/lightning_media": {
             "drupal/entity_browser": {
-              "2877751 - Inform users how many items they can add to a field that uses an entity browser": "https://www.drupal.org/files/issues/2877751-17.patch"
+              "2877751 - Inform users how many items they can add to a field that uses an entity browser": "https://www.drupal.org/files/issues/2877751-27-8.x-2.x.patch"
             }
           }
         }
