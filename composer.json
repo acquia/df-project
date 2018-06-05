@@ -7,31 +7,31 @@
     "prefer-stable": true,
     "require-dev": {
         "drush/drush": "^9.0",
-        "drupal/console": "1.0.1",
-        "drupal/media_entity_generic": "^1.0",
+        "drupal/console": "^1.7.0",
         "acquia/lightning_dev": "dev-8.x-1.x"
     },
     "require": {
-        "drupal-composer/drupal-scaffold": "^2.0.0",
-        "cweagans/composer-patches": "^1.6.0",
         "acquia/df": "dev-8.x-3.x",
         "loopindex/ckeditor-track-changes": "dev-master#a7df5c6b685385713e8aaf2df3f44c82e3bf823a"
     },
-    "repositories": {
-        "drupal": {
+    "repositories": [
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
-        "assets": {
+        {
             "type": "composer",
             "url": "https://asset-packagist.org"
         },
-        "dev": {
-            "type": "github",
-            "url": "https://github.com/acquia/lightning-dev",
-            "no-api": true
+        {
+            "type": "vcs",
+            "url": "https://github.com/acquia/lightning-dev"
         },
-        "lite": {
+        {
+            "type": "vcs",
+            "url": "https://github.com/acquia/lift-sdk-php"
+        },
+        {
             "type": "package",
             "package": {
                 "name": "loopindex/ckeditor-track-changes",
@@ -44,7 +44,7 @@
                 }
             }
         }
-    },
+    ],
     "scripts": {
         "post-install-cmd": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
         "post-update-cmd": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
