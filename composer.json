@@ -7,7 +7,7 @@
     "prefer-stable": true,
     "require-dev": {
         "drush/drush": "^9.0",
-        "drupal/console": "^1.7.0",
+        "drupal/console": "^1.8.0",
         "acquia/lightning_dev": "dev-8.x-1.x"
     },
     "require": {
