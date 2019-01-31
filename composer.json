@@ -8,7 +8,7 @@
     "require-dev": {
         "drush/drush": "^9.0",
         "drupal/console": "^1.8.0",
-        "acquia/lightning_dev": "dev-8.x-1.x"
+        "acquia/lightning_dev": "dev-8.x-1.x#dec22c2d10d5bdbbb1f4b8b885edac3cc72368e2"
     },
     "require": {
         "acquia/df": "dev-8.x-3.x",
