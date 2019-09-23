@@ -7,12 +7,11 @@
     "prefer-stable": true,
     "require-dev": {
         "drush/drush": "^9.0",
-        "drupal/console": "^1.8.0",
-        "acquia/lightning_dev": "dev-8.x-1.x#dec22c2d10d5bdbbb1f4b8b885edac3cc72368e2"
+        "drupal/console": "^1.9.0",
+        "acquia/lightning_dev": "dev-8.x-1.x"
     },
     "require": {
-        "acquia/df": "^3.0",
-        "loopindex/ckeditor-track-changes": "dev-master#a7df5c6b685385713e8aaf2df3f44c82e3bf823a"
+        "acquia/df": "dev-8.x-4.x",
     },
     "repositories": [
         {
@@ -30,19 +29,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/acquia/lift-sdk-php"
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "loopindex/ckeditor-track-changes",
-                "version": "dev-master",
-                "type": "drupal-library",
-                "source": {
-                    "url": "https://github.com/loopindex/ckeditor-track-changes.git",
-                    "type": "git",
-                    "reference": "dev-master"
-                }
-            }
         }
     ],
     "scripts": {
@@ -79,11 +65,21 @@
         },
         "enable-patching": true,
         "patches-ignore": {
+            "drupal/lightning_layout": {
+                "drupal/core": {
+                    "2955065 - Customized layout does not display for node with customizations enabled when using full content view mode": "https://www.drupal.org/files/issues/2019-03-25/2955065-25.patch"
+                }
+            },
             "drupal/lightning_media": {
                 "drupal/entity_browser": {
                     "2877751 - Inform users how many items they can add to a field that uses an entity browser": "https://www.drupal.org/files/issues/2018-06-28/2877751-39-8.x-2.x.patch"
                 }
+            },
+            "drupal/jsonapi_schema": {
+               "drupal/core": {
+                 "3014277 - ResourceTypes should know about their fields": "https://www.drupal.org/files/issues/2019-06-06/3014277--resource-fields--36.patch"
+              }
             }
-        }  
+        }
     }
 }
