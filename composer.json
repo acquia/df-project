@@ -11,7 +11,7 @@
         "acquia/lightning_dev": "dev-8.x-1.x"
     },
     "require": {
-        "acquia/df": "dev-8.x-4.x",
+        "acquia/df": "dev-8.x-4.x"
     },
     "repositories": [
         {
