@@ -11,7 +11,7 @@
         "acquia/lightning_dev": "dev-8.x-1.x#dec22c2d10d5bdbbb1f4b8b885edac3cc72368e2"
     },
     "require": {
-        "acquia/df": "^3.0",
+        "acquia/df": "dev-8.x-3.x",
         "loopindex/ckeditor-track-changes": "dev-master#a7df5c6b685385713e8aaf2df3f44c82e3bf823a"
     },
     "repositories": [
