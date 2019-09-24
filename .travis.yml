@@ -60,14 +60,8 @@ install:
   - cd docroot
 
 before_script:
-  - drush runserver --default-server=builtin 8080 &>/dev/null &
-
-  # Start Selenium and dump its ginormous log into a temporary file.
-  - jdk_switcher use oraclejdk8
-  - mkdir tmp
-  - selenium-server-standalone -port 4444 -log tmp/selenium2.log &
-  - sleep 5
-  - cd ..
+  - drush runserver --default-server=builtin --quiet 8080 &
+  - chromedriver --port=4444 &
 
 script:
   - if [[ "$SCENARIO" != df ]]; then behat --config .behat.yml --stop-on-failure --tags=$SCENARIO; fi
