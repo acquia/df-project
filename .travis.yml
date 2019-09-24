@@ -50,7 +50,7 @@ install:
   - phpenv config-add drupal.php.ini
 
   # Build the DF code base.
-  - composer install --prefer-source 
+  - composer install
 
   # Install DF.
   - lightning install 'mysql\://df:df@127.0.0.1/drupal' $SCENARIO 'http://127.0.0.1:8080' --no-dev
