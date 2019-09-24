@@ -50,6 +50,8 @@ install:
   - phpenv config-add drupal.php.ini
 
   # Build the DF code base.
+  - composer require --dev acquia/lightning_dev:dev-8.x-1.x --no-update
+  - composer install
   - composer install --prefer-source
 
   # Install DF.
