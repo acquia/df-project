@@ -16,8 +16,7 @@ php:
 env:
   matrix:
     - SCENARIO=df
-    - SCENARIO=dfs_dev
-    - SCENARIO=dfs_tec
+    - SCENARIO=dfs_one
 
 addons:
   apt:
