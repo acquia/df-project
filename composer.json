@@ -12,7 +12,7 @@
     "require": {
         "acquia/df": "dev-8.x-4.x"
     },
-    "repositories": [
+    "repositories": {
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
@@ -30,7 +30,7 @@
             "url": "https://github.com/acquia/lightning-dev",
             "no-api": true
         }
-    ],
+    },
     "scripts": {
         "post-install-cmd": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
         "post-update-cmd": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
