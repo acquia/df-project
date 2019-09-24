@@ -68,9 +68,7 @@ install:
   # PHP conf tweaks
   - echo 'max_execution_time = 120' >> drupal.php.ini;
   - echo 'sendmail_path = /bin/true' >> drupal.php.ini;
-  - echo 'memory_limit = -1' >> drupal.php.ini;
   - phpenv config-add drupal.php.ini
-  - php -i | grep memory_limit
 
   # Build the DF code base.
   - composer install
@@ -93,7 +91,6 @@ before_script:
   - cd ..
 
 script:
-  - if [[ "$SCENARIO" != df ]]; then behat --config .behat.yml --stop-on-failure --tags=df; fi
   - if [[ "$SCENARIO" != df ]]; then behat --config .behat.yml --stop-on-failure --tags=$SCENARIO; fi
 
 matrix:
