@@ -68,8 +68,9 @@ install:
   # PHP conf tweaks
   - echo 'max_execution_time = 120' >> drupal.php.ini;
   - echo 'sendmail_path = /bin/true' >> drupal.php.ini;
-  - echo 'memory_limit = "1G"'
+  - echo 'memory_limit = 350M'
   - phpenv config-add drupal.php.ini
+  - php -i | grep memory_limit
   - phpenv rehash
 
   # Build the DF code base.
