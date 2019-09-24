@@ -48,7 +48,7 @@
     "scripts": {
         "post-install-cmd": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
         "post-update-cmd": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-        "nuke": "rm -r -f docroot/modules/contrib docroot/profiles/contrib/df vendor composer.lock"
+        "nuke": "rm -r -f docroot/modules/contrib docroot/profiles vendor composer.lock"
     },
     "extra": {
         "installer-types": [
