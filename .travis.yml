@@ -25,6 +25,8 @@ addons:
     - libappindicator1
     - fonts-liberation
 
+before_script: echo 'memory_limit = "1G"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+
 before_install:
   # Add the oauth token to prevent GitHub timeouts.
   - git config --global github.accesstoken $GITHUB_OAUTH_TOKEN
