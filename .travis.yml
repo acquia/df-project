@@ -17,6 +17,9 @@ env:
     - SCENARIO=df
     - SCENARIO=dfs_one
 
+services:
+  - mysql
+
 addons:
   chrome: stable
   apt:
