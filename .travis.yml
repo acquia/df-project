@@ -26,9 +26,6 @@ addons:
     - fonts-liberation
 
 before_install:
-  # Add the oauth token to prevent GitHub timeouts.
-  - git config --global github.accesstoken $GITHUB_OAUTH_TOKEN
-
   # Disable xdebug.
   - phpenv config-rm xdebug.ini
 
