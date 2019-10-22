@@ -10,7 +10,7 @@
         "drupal/console": "^1.9.0"
     },
     "require": {
-        "acquia/df": "dev-8.x-4.x"
+        "acquia/df": "^4.0"
     },
     "repositories": {
         "drupal": {
