@@ -21,14 +21,21 @@
             "type": "composer",
             "url": "https://asset-packagist.org"
         },
+        "dev": {
+            "type": "vcs",
+            "url": "https://github.com/brantwynn/lightning-dev"
+        },
         "lift": {
             "type": "vcs",
             "url": "https://github.com/acquia/lift-sdk-php"
         },
-        "dev": {
-            "type": "github",
-            "url": "https://github.com/acquia/lightning-dev",
-            "no-api": true
+        "cohesion": {
+            "type": "vcs",
+            "url": "https://bitbucket.org/cohesion_dev/dx8-module.git"
+        },
+        "cohesion-theme": {
+            "type": "vcs",
+            "url": "https://bitbucket.org/cohesion_dev/dx8-theme.git"
         }
     },
     "scripts": {
