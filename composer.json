@@ -77,7 +77,8 @@
             },
             "drupal/jsonapi_schema": {
                "drupal/core": {
-                 "3014277 - ResourceTypes should know about their fields": "https://www.drupal.org/files/issues/2019-06-06/3014277--resource-fields--36.patch"
+                 "3014277 - ResourceTypes should know about their fields": "https://www.drupal.org/files/issues/2019-06-06/3014277--resource-fields--36.patch",
+                 "3061610 - Typed Data's EntityDeriver does not derive bundle-level data types when a bundle has the same name as its entity type (f.e. entity:comment:comment)": "https://www.drupal.org/files/issues/2019-06-14/3061610-12.patch"
               }
             }
         }
