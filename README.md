@@ -1,4 +1,4 @@
-This is a Composer-based installer for the [Demo Framework](https://www.drupal.org/project/df) Drupal distribution. Welcome to the future!
+This is a Composer-based installer for the [Demo Framework](https://github.com/acquia/df) Drupal distribution. Welcome to the future!
 
 ## Get Started
 ```
