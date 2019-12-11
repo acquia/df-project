@@ -1,15 +1,21 @@
-This is a Composer-based installer for the [Demo Framework](https://github.com/acquia/df) Drupal distribution. Welcome to the future!
+This is a Composer-based installer for the [Demo Framework](https://github.com/acquia/df) Drupal distribution.
 
 ## Get Started
 ```
 $ composer create-project acquia/df-project MY_PROJECT -s dev
 ```
-Composer will create a new directory called MY_PROJECT containing a ```docroot``` directory with a full Lightning code base therein. You can then install it like you would any other Drupal site.
+Composer will create a new directory called MY_PROJECT containing a ```docroot``` directory with a full Demo Framrwork code base therein. You can then install it like you would any other Drupal site. 
+
+If you need help getting an environment going, we recommend using DDev or Acquia Developer Studio. It's also possible to quickly spin up a site using the `runserver` command for drush and a local sqlite database.
+
+``drush runserver``
+
+``drush site-install --db-url=sqlite://../df.sqlite``
+
+Other tested environments for DF include Acquia Dev Desktop, Acquia Cloud and Acquia Cloud Site Factory.
 
 ## Maintenance
-```drush make```, ```drush pm-download```, ```drush pm-update``` and their ilk are the old-school way of maintaining your code base. Forget them. You're in Composer land now!
-
-Let this handy table be your guide:
+Once you've started a new project based on this one, you'll want to add more extensions. Let this handy table be your guide:
 
 | Task                                            | Drush                                         | Composer                                          |
 |-------------------------------------------------|-----------------------------------------------|---------------------------------------------------|
