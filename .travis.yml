@@ -55,7 +55,7 @@ install:
   - php -i | grep memory_limit
 
   # Build the DF code base.
-  - composer install
+  - COMPOSER_MEMORY_LIMIT=-1 composer install
 
   # Install Demo Framework cleanly so that settings.php will be created properly.
   - drush site-install df --db-url=mysql://df:df@127.0.0.1/drupal -y
