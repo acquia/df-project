@@ -1,5 +1,6 @@
+sudo: required
+dist: trusty
 language: php
-dist: xenial
 
 cache:
   bundler: true
@@ -14,14 +15,10 @@ php:
 
 env:
   matrix:
-    - SCENARIO=df
     - SCENARIO=dfs_one
-
-services:
-  - mysql
+    - SCENARIO=none
 
 addons:
-  chrome: stable
   apt:
     packages:
     # Dependencies for Chrome.
@@ -29,43 +26,62 @@ addons:
     - fonts-liberation
 
 before_install:
-  # Disable xdebug.
-  - phpenv config-rm xdebug.ini
-
   # Update composer.
   - composer self-update
   - composer --version
+
+  # Start up Chrome.
+  - google-chrome-stable --version
+
+  # Disable xdebug.
+  - phpenv config-rm xdebug.ini
 
 install:
   # Add Composer's local bin directory to the PATH so that we will be running
   # our installed versions of Drush, PHPCS, Behat, PhantomJS, etc.
   - export PATH="$HOME/.composer/vendor/bin:$TRAVIS_BUILD_DIR/vendor/bin:$PATH"
 
+  # Composer install should fail on bad patches.
+  - export COMPOSER_EXIT_ON_PATCH_FAILURE=1
+
   # Create the MySQL database and add a user for testing.
   - mysql -u root -e "CREATE DATABASE drupal; CREATE USER 'df'@'localhost' IDENTIFIED BY 'df'; GRANT ALL ON drupal.* TO 'df'@'localhost';"
 
-  # PHP conf tweaks
+  # Tweak PHP configuration.
+  - echo 'memory_limit = -1' >> drupal.php.ini;
   - echo 'max_execution_time = 120' >> drupal.php.ini;
   - echo 'sendmail_path = /bin/true' >> drupal.php.ini;
   - phpenv config-add drupal.php.ini
+  - php -i | grep memory_limit
 
   # Build the DF code base.
-  - composer require --dev acquia/lightning_dev:dev-8.x-1.x --no-update
-  - COMPOSER_MEMORY_LIMIT=-1 composer install
+  - composer install
 
-  # Install DF.
-  - lightning install 'mysql\://df:df@127.0.0.1/drupal' $SCENARIO 'http://127.0.0.1:8080' --no-dev
-
-  # Generate the Behat config.
-  - lightning configure:behat 'http://127.0.0.1:8080'
-  - cd docroot
+  # Install Demo Framework cleanly so that settings.php will be created properly.
+  - drush site-install df --db-url=mysql://df:df@127.0.0.1/drupal -y
+  - robo configure:behat 'http://127.0.0.1:8080'
 
 before_script:
-  - drush runserver --default-server=builtin --quiet 8080 &
-  - chromedriver --port=4444 &
+  - drush config:set system.date timezone.default $TZ --yes
+  - drush runserver --default-server=builtin 8080 &>/dev/null &
+  - google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost &
 
 script:
-  - if [[ "$SCENARIO" != df ]]; then behat --config .behat.yml --stop-on-failure --tags=$SCENARIO; fi
+  - composer validate composer.json --no-check-all --ansi --no-interaction
+  - if [[ "$SCENARIO" == none ]]; then drush en df_tools_test -y; fi
+  - if [[ "$SCENARIO" == none ]]; then drush en df_tools_media_acquiadam -y; fi
+  - if [[ "$SCENARIO" == none ]]; then drush en df_tools_translation -y; fi
+  - if [[ "$SCENARIO" == none ]]; then behat --config .behat.yml --stop-on-failure --tags=df; fi
+  - if [[ "$SCENARIO" != none ]]; then drush en $SCENARIO -y; fi
+  - if [[ "$SCENARIO" != none ]]; then behat --config .behat.yml --stop-on-failure --tags=$SCENARIO; fi
+
+after_failure:
+  - cd docroot
+  - drush watchdog:show --count=100 --severity=Error --extended
+
+after_success:
+  - cd docroot
+  - drush ev "drush_print('Build has finished successfully!', 20);" --druplicon
 
 matrix:
   fast_finish: true
