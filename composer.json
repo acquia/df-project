@@ -6,6 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
+        "drupal/default_content_deploy": "1.x-dev#97ea1ae as 1.x-dev",
         "drupal/slick" : "2.1.0 as 2.0.0",
         "acquia/df": "^4.0.2"
     },
