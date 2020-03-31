@@ -59,7 +59,6 @@ install:
 
   # Install Demo Framework cleanly so that settings.php will be created properly.
   - drush site-install df --db-url=mysql://df:df@127.0.0.1/drupal -y
-  - robo configure:behat 'http://127.0.0.1:8080'
 
 before_script:
   - drush config:set system.date timezone.default $TZ --yes
@@ -71,9 +70,7 @@ script:
   - if [[ "$SCENARIO" == none ]]; then drush en df_tools_test -y; fi
   - if [[ "$SCENARIO" == none ]]; then drush en df_tools_media_acquiadam -y; fi
   - if [[ "$SCENARIO" == none ]]; then drush en df_tools_translation -y; fi
-  - if [[ "$SCENARIO" == none ]]; then behat --config .behat.yml --stop-on-failure --tags=df; fi
   - if [[ "$SCENARIO" != none ]]; then drush en $SCENARIO -y; fi
-  - if [[ "$SCENARIO" != none ]]; then behat --config .behat.yml --stop-on-failure --tags=$SCENARIO; fi
 
 after_failure:
   - cd docroot
