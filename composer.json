@@ -5,10 +5,6 @@
     "license": "GPL-2.0+",
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "require-dev": {
-        "drush/drush": "^9.0",
-        "drupal/console": "^1.9.0"
-    },
     "require": {
         "acquia/df": "^4.0.2"
     },
