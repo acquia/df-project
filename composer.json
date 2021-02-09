@@ -25,14 +25,6 @@
         "lift-samples": {
             "type": "vcs",
             "url": "https://github.com/acquia/acquia-lift-samples"
-        },
-        "cohesion": {
-            "type": "vcs",
-            "url": "https://bitbucket.org/cohesion_dev/dx8-module.git"
-        },
-        "cohesion-theme": {
-            "type": "vcs",
-            "url": "https://bitbucket.org/cohesion_dev/dx8-theme.git"
         }
     },
     "scripts": {
