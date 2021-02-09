@@ -30,16 +30,19 @@
     "scripts": {
         "remove-git-submodules" : "find . -mindepth 2 -type d -name .git | xargs rm -rf",
         "post-install-cmd": [
-          "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
           "@remove-git-submodules"
         ],
         "post-update-cmd": [
-          "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
           "@remove-git-submodules"
         ],
         "nuke": "rm -r -f docroot/modules/contrib docroot/profiles vendor composer.lock"
     },
     "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "docroot/"
+            }
+        },
         "installer-types": [
             "bower-asset",
             "npm-asset"
