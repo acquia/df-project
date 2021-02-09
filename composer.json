@@ -74,24 +74,6 @@
                 "type:drupal-drush"
             ]
         },
-        "enable-patching": true,
-        "patches-ignore": {
-            "drupal/lightning_layout": {
-                "drupal/core": {
-                    "2955065 - Customized layout does not display for node with customizations enabled when using full content view mode": "https://www.drupal.org/files/issues/2019-03-25/2955065-25.patch"
-                }
-            },
-            "drupal/lightning_media": {
-                "drupal/entity_browser": {
-                    "2877751 - Inform users how many items they can add to a field that uses an entity browser": "https://www.drupal.org/files/issues/2018-06-28/2877751-39-8.x-2.x.patch"
-                }
-            },
-            "drupal/jsonapi_schema": {
-               "drupal/core": {
-                 "3014277 - ResourceTypes should know about their fields": "https://www.drupal.org/files/issues/2019-06-06/3014277--resource-fields--36.patch",
-                 "3061610 - Typed Data's EntityDeriver does not derive bundle-level data types when a bundle has the same name as its entity type (f.e. entity:comment:comment)": "https://www.drupal.org/files/issues/2019-06-14/3061610-12.patch"
-              }
-            }
-        }
+        "enable-patching": true
     }
 }
